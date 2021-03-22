@@ -12,7 +12,7 @@ def walk(path, r = False):
 
             if os.path.isdir(os.path.join(path,f)) & r:
                 print('Searching subfolder : ' + f)
-                walk(os.path.join(path,f)) 
+                walk(os.path.join(path,f), r) 
             else:
                 compress(os.path.join(path,f))
 def compress(f):
@@ -21,8 +21,8 @@ def compress(f):
         print(f'File : "{f}" compressed')
 
 parser = argparse.ArgumentParser()
-parser.add_argument('-r', action='store_true', default=False, help='Use recursion')
-parser.add_argument('--path', default=os.getcwd(), help='The path of the file or folder to compress default to current work directory')
+parser.add_argument('-r', action='store_true', default=False, help='use recursion')
+parser.add_argument('--path', default=os.getcwd(), help='the path of the file or folder to compress, default to current work directory')
 args = parser.parse_args()
 
 walk(args.path,args.r)
